@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PrevIA (v0.1.0)</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="popup.css" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="./icons/icon.svg">
+</head>
+
+<body>
+  <nav class="navbar shadow-sm navbar-custom">
+    <div class="d-flex align-items-center justify-content-between w-100">
+      <div class="d-flex align-items-center gap-3">
+        <div class="brand-icon">
+          <img src="./icons/icon.svg" alt="Lupa" width="22" height="22">
+        </div>
+        <div>
+          <div class="brand-title">PrevIA <span class="brand-version">(v0.1.0)</span></div>
+          <div class="brand-subtitle">Protege y analiza tus textos antes de compartirlos. 100 % privado, 100 % offline.</div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+<div id="appAlertContainer"></div>
+
+  <header class="container py-3 border-bottom">
+    <p class="subtle mb-0">
+      Herramienta destinada a la preparación y anonimización de textos.
+    </p>
+  </header>
+
+  <main class="container my-4">
+    <div class="accordion" id="spgAccordion">
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headInput">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#paneInput"
+            aria-expanded="true" aria-controls="paneInput">
+            1) Entrada
+          </button>
+        </h2>
+        <div id="paneInput" class="accordion-collapse collapse show" aria-labelledby="headInput"
+          data-bs-parent="#spgAccordion">
+          <div class="accordion-body">
+            <label for="inputText" class="form-label fw-semibold">Texto de entrada</label>
+            <textarea id="inputText" class="form-control" rows="8" placeholder="Pega aquí tu texto…"></textarea>
+
+            <div class="row g-3 align-items-end mt-2">
+              <div class="col-md-6">
+                <label for="noticeSelect" class="form-label fw-semibold">Insertar aviso o nota</label>
+                <div class="input-group">
+                  <select class="form-select" id="noticeSelect">
+                    <option value="">— Selecciona un aviso —</option>
+                    <option
+                      value="Contexto técnico: el texto debe ser analizado con precisión y objetividad, sin añadir interpretaciones creativas.">
+                      Contexto técnico</option>
+                    <option
+                      value="Análisis crítico: se solicita una evaluación objetiva del contenido, identificando riesgos o inconsistencias.">
+                      Análisis crítico</option>
+                    <option
+                      value="Confidencialidad: el texto contiene información sensible y no debe utilizarse para entrenamiento ni almacenamiento.">
+                      Confidencialidad</option>
+                    <option
+                      value="Tono institucional: redactar la respuesta con lenguaje formal, claro y ajustado a un contexto administrativo.">
+                      Tono institucional</option>
+                    <option
+                      value="Simplificación: reformular el texto con lenguaje claro, evitando tecnicismos innecesarios.">
+                      Simplificación</option>
+                    <option
+                      value="Reescritura ética: adaptar el texto evitando sesgos, lenguaje inapropiado o referencias personales.">
+                      Reescritura ética</option>
+                    <option
+                      value="Protección de datos: eliminar o anonimizar cualquier dato personal antes de procesar el contenido.">
+                      Protección de datos</option>
+                    <option
+                      value="Citación académica: elaborar un resumen estructurado con referencias y fuentes verificables.">
+                      Citación académica</option>
+                    <option
+                      value="Ejemplos controlados: incluir ejemplos ilustrativos sin incorporar información no verificada.">
+                      Ejemplos controlados</option>
+                    <option
+                      value="Revisión de seguridad: comprobar que el texto no contiene información sensible o clasificada.">
+                      Revisión de seguridad</option>
+                  </select>
+                  <button class="btn btn-outline-success" id="btnInsertNotice" type="button">Insertar</button>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="sticky-actions mt-3 border-top pt-3">
+              <div class="d-flex flex-wrap gap-2">
+                <button class="btn btn-primary" id="btnAnalyze">Analizar</button>
+                <button class="btn btn-outline-secondary" id="btnPseudonym">Seudonimizar</button>
+                <button class="btn btn-outline-secondary" id="btnGeneralize">Generalizar</button>
+                <button class="btn btn-outline-danger" id="btnClear">Limpiar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headOutput">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#paneOutput"
+            aria-expanded="true" aria-controls="paneOutput">
+            2) Salida
+          </button>
+        </h2>
+        <div id="paneOutput" class="accordion-collapse collapse show" aria-labelledby="headOutput"
+          data-bs-parent="#spgAccordion">
+          <div class="accordion-body">
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <span class="subtle">Riesgo estimado:</span>
+              <span id="riskBadge" class="risk-badge risk-low">BAJO</span>
+            </div>
+            <ul id="findings" class="findings subtle mb-2"></ul>
+            <label for="outputText" class="form-label fw-semibold">Texto securizado</label>
+            <textarea id="outputText" class="form-control" rows="10"
+              placeholder="El texto procesado aparecerá aquí…"></textarea>
+            <div class="d-flex flex-wrap gap-2 mt-2">
+              <button class="btn btn-outline-success" id="btnCopy">Copiar resultado</button>
+              <button class="btn btn-outline-dark" id="btnDownload">Descargar .txt</button>
+            </div>
+            <p class="small subtle mt-3 mb-0">
+              Nota: Este prototipo realiza inspecciones heurísticas (regex) con fines educativos.
+              Valida siempre con tu responsable de seguridad/DPD.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headProtect">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#paneProtect"
+            aria-controls="paneProtect">
+            3) Customizar
+          </button>
+        </h2>
+        <div id="paneProtect" class="accordion-collapse collapse show" aria-labelledby="headProtect"
+          data-bs-parent="#spgAccordion">
+          <div class="accordion-body">
+            <p class="subtle">Selecciona los tipos de datos a detectar o transformar (todo marcado por defecto).</p>
+            <form id="protectForm" class="row row-cols-1 row-cols-md-2 g-2">
+              <div class="form-check"><input class="form-check-input protect" type="checkbox" value="names" id="p_names"
+                  checked><label class="form-check-label" for="p_names"> Nombres → <span
+                    class="code">[NOMBRE_#]</span></label></div>
+              <div class="form-check"><input class="form-check-input protect" type="checkbox" value="dni" id="p_dni"
+                  checked><label class="form-check-label" for="p_dni"> DNI/NIE → <span class="code">[DNI]</span></label>
+              </div>
+              <div class="form-check"><input class="form-check-input protect" type="checkbox" value="phone" id="p_phone"
+                  checked><label class="form-check-label" for="p_phone"> Teléfonos → <span
+                    class="code">[TEL]</span></label></div>
+              <div class="form-check"><input class="form-check-input protect" type="checkbox" value="email" id="p_email"
+                  checked><label class="form-check-label" for="p_email"> Emails → <span
+                    class="code">[EMAIL]</span></label></div>
+              <div class="form-check"><input class="form-check-input protect" type="checkbox" value="iban" id="p_iban"
+                  checked><label class="form-check-label" for="p_iban"> IBAN → <span class="code">[IBAN]</span></label>
+              </div>
+              <div class="form-check"><input class="form-check-input protect" type="checkbox" value="url" id="p_url"
+                  checked><label class="form-check-label" for="p_url"> URLs → <span class="code">[URL]</span></label>
+              </div>
+              <div class="form-check"><input class="form-check-input protect" type="checkbox" value="address"
+                  id="p_address" checked><label class="form-check-label" for="p_address"> Direcciones → <span
+                    class="code">[DIRECCIÓN]</span></label></div>
+              <div class="form-check"><input class="form-check-input protect" type="checkbox" value="date" id="p_date"
+                  checked><label class="form-check-label" for="p_date"> Fechas → <span
+                    class="code">[FECHA]</span></label></div>
+              <div class="form-check"><input class="form-check-input protect" type="checkbox" value="exp" id="p_exp"
+                  checked><label class="form-check-label" for="p_exp"> Nº Expediente → <span
+                    class="code">[EXPEDIENTE]</span></label></div>
+              <div class="form-check"><input class="form-check-input protect" type="checkbox" value="id" id="p_id"
+                  checked><label class="form-check-label" for="p_id"> Identificadores → <span
+                    class="code">[ID]</span></label></div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headGoodPractices">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#paneGoodPractices" aria-expanded="false" aria-controls="paneGoodPractices">
+            Buenas prácticas de seguridad y cumplimiento
+          </button>
+        </h2>
+        <div id="paneGoodPractices" class="accordion-collapse collapse" aria-labelledby="headGoodPractices"
+          data-bs-parent="#spgAccordion">
+          <div class="accordion-body">
+            <p class="mb-3 text-muted">
+              Recomendaciones básicas para revisar y proteger la información antes de compartirla con sistemas de
+              inteligencia artificial.
+              Su finalidad es promover un uso responsable, seguro y consciente de los datos en entornos digitales.
+            </p>
+
+            <ol class="ps-3">
+              <li><strong>Valida la necesidad del uso:</strong> asegúrate de que el tratamiento de la información tiene
+                una finalidad clara y justificada.</li>
+              <li><strong>Reduce la exposición de datos:</strong> comparte únicamente lo imprescindible y aplica
+                técnicas de anonimización o generalización cuando sea posible.</li>
+              <li><strong>Evita contenido sensible o confidencial:</strong> no incluyas datos personales, información
+                privada o identificadores reales.</li>
+              <li><strong>Usa entornos seguros:</strong> trabaja en plataformas autorizadas y revisa siempre las
+                condiciones de privacidad y uso.</li>
+              <li><strong>Clasifica y protege la información:</strong> evalúa el nivel de sensibilidad del contenido
+                antes de enviarlo o publicarlo.</li>
+              <li><strong>Conserva trazabilidad:</strong> guarda una copia del texto original y registra su uso o
+                propósito.</li>
+              <li><strong>Fomenta la transparencia:</strong> indica cuándo se ha utilizado inteligencia artificial para
+                generar, analizar o revisar contenido.</li>
+              <li><strong>Limita la retención:</strong> elimina los datos cuando ya no sean necesarios y evita su
+                reutilización sin revisión.</li>
+              <li><strong>Promueve la formación responsable:</strong> sensibiliza al personal y usuarios sobre el uso
+                ético y seguro de la IA.</li>
+            </ol>
+
+            <p class="mt-4 mb-0 small text-muted">
+              Nota: Estas orientaciones tienen carácter informativo y se inspiran en diversas guías y estrategias
+              públicas sobre gestión responsable de la información y uso ético de la inteligencia artificial.
+            </p>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </main>
+
+  <footer class="app-footer">
+    <p>
+      Desarrollado por
+      <strong>
+        <button id="btnLinkedIn" class="link-button">
+          Sara Cubero
+        </button>
+      </strong>
+      · 2025
+    </p>
+  </footer>
+
+
+  <script src="lib/bootstrap.bundle.min.js"></script>
+  <script src="popup.js"></script>
+</body>
+
+</html>
