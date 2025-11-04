@@ -1,4 +1,3 @@
-// Palabras clave por tipo de dato
 export const keywordHints = {
   names: ['nombre', 'apellidos', 'persona', 'sr', 'sra', 'don', 'dona'],
   dni: ['dni', 'nie', 'documento', 'identificador'],
@@ -12,7 +11,6 @@ export const keywordHints = {
   id: ['uuid', 'identificador', 'id']
 };
 
-// Busca las palabras clave en el texto normalizado
 export function markKeywordContexts(text) {
   const found = [];
   for (const [type, words] of Object.entries(keywordHints)) {

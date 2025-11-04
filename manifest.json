@@ -1,17 +1,18 @@
 {
   "manifest_version": 3,
-  "name": "PrevIA – Protege tus textos",
+  "name": "PrevIA (Protege tu información)",
   "version": "0.1.0",
-  "description": "Anonimiza y securiza textos antes de enviarlos a sistemas de inteligencia artificial. 100 % local: sin red, sin dependencias.",
+  "description": "Anonimiza, generaliza o securiza textos antes de enviarlos a sistemas de inteligencia artificial. Offline, local, sin red, sin dependencias.",
   
   "author": "Sara Cubero García-Conde",
 
   "icons": {
     "16": "icons/icon16.png",
     "32": "icons/icon32.png",
-    "48": "icons/icon32.png",
+    "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
+
   "action": {
     "default_icon": {
       "16": "icons/icon16.png",
@@ -19,11 +20,21 @@
     },
     "default_title": "Abrir PrevIA"
   },
+
   "background": {
     "service_worker": "background.js"
   },
+
   "permissions": ["windows"],
+
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self';"
+  },
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "previa@saracubero.dev",
+      "strict_min_version": "109.0"
+    }
   }
 }

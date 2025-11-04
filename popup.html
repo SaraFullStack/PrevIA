@@ -5,13 +5,18 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>PrevIA (v0.1.0)</title>
-
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="lib/bootstrap.min.css">
   <link href="popup.css" rel="stylesheet">
   <link rel="icon" type="image/svg+xml" href="./icons/icon.svg">
 </head>
 
 <body>
+  <noscript>
+    <div class="alert alert-danger text-center m-2">
+      Esta herramienta requiere JavaScript para funcionar correctamente.
+    </div>
+  </noscript>
+
   <nav class="navbar shadow-sm navbar-custom">
     <div class="d-flex align-items-center justify-content-between w-100">
       <div class="d-flex align-items-center gap-3">
@@ -20,13 +25,14 @@
         </div>
         <div>
           <div class="brand-title">PrevIA <span class="brand-version">(v0.1.0)</span></div>
-          <div class="brand-subtitle">Protege y analiza tus textos antes de compartirlos. 100 % privado, 100 % offline.</div>
+          <div class="brand-subtitle">Protege y analiza tus textos antes de compartirlos. 100 % privado, 100 % offline.
+          </div>
         </div>
       </div>
     </div>
   </nav>
 
-<div id="appAlertContainer"></div>
+  <div id="appAlertContainer"></div>
 
   <header class="container py-3 border-bottom">
     <p class="subtle mb-0">
@@ -98,9 +104,11 @@
                 <button class="btn btn-primary" id="btnAnalyze">Analizar</button>
                 <button class="btn btn-outline-secondary" id="btnPseudonym">Seudonimizar</button>
                 <button class="btn btn-outline-secondary" id="btnGeneralize">Generalizar</button>
+                <button class="btn btn-outline-warning" id="btnManualAnon">Anonimizar selección</button>
                 <button class="btn btn-outline-danger" id="btnClear">Limpiar</button>
               </div>
             </div>
+
           </div>
         </div>
       </div>
@@ -127,10 +135,21 @@
               <button class="btn btn-outline-success" id="btnCopy">Copiar resultado</button>
               <button class="btn btn-outline-dark" id="btnDownload">Descargar .txt</button>
             </div>
-            <p class="small subtle mt-3 mb-0">
-              Nota: Este prototipo realiza inspecciones heurísticas (regex) con fines educativos.
-              Valida siempre con tu responsable de seguridad/DPD.
-            </p>
+            <br />
+            <div class="alert alert-warning d-flex align-items-center mb-3" role="alert">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                class="bi bi-exclamation-triangle me-2 flex-shrink-0" viewBox="0 0 16 16" role="img"
+                aria-label="Warning:">
+                <path
+                  d="M7.938 2.016a.13.13 0 0 1 .125 0l6.857 11.856c.047.081.047.182 0 .263a.145.145 0 0 1-.125.065H2.205a.145.145 0 0 1-.125-.065.216.216 0 0 1 0-.263L8.938 2.016zM8 5c-.535 0-.954.462-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 5zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
+              </svg>
+              <div>
+                <strong>Cuidado:</strong> esta herramienta puede ayudarte a proteger tus textos, pero el resultado
+                podría requerir
+                <u>revisión o retoques manuales</u> antes de su uso o envío final.
+              </div>
+            </div>
+
           </div>
         </div>
       </div>

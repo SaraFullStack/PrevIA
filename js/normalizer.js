@@ -1,14 +1,11 @@
-// Prepara el texto para análisis (minúsculas, sin tildes, abreviaturas expandidas)
 export function normalizeForDetection(text) {
   if (!text) return '';
 
   let t = text.normalize('NFC').toLowerCase();
 
-  // Quitar tildes y diéresis
   const map = { á: 'a', é: 'e', í: 'i', ó: 'o', ú: 'u', ü: 'u', ñ: 'n' };
   t = t.replace(/[áéíóúüñ]/g, m => map[m] || m);
 
-  // Expandir abreviaturas frecuentes
   t = t
     .replace(/\bc\/\s*/g, 'calle ')
     .replace(/\bavda\.?\s*/g, 'avenida ')
@@ -18,7 +15,6 @@ export function normalizeForDetection(text) {
     .replace(/\bpº\s*/g, 'paseo ')
     .replace(/\bnº\b/g, 'numero ');
 
-  // Limpiar espacios/puntuación redundante
   t = t
     .replace(/[ \t]+/g, ' ')
     .replace(/\s*([.,;:!?])\s*/g, '$1 ')
