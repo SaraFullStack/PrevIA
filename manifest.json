@@ -25,5 +25,5 @@
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'self';"
   },
-  "privacy_policy": "https://github.com/SaraFullStack/PrevIA/blob/main/PRIVACY.md"
+  "privacy_policy": "https://github.com/SaraFullStack/PrevIA/blob/main/privacy.html"
 }
