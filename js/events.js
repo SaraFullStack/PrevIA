@@ -121,7 +121,8 @@ export function bindEvents() {
 
   if (btnLinkedIn) {
     btnLinkedIn.addEventListener('click', () => {
-      window.open('https://www.linkedin.com/in/sara-cubero', '_blank');
+      window.open('https://github.com/SaraFullStack/PrevIA', '_blank');
+      window.open('https://sarafullstack.github.io/', '_blank');
     });
   }
 

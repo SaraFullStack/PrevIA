@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alcance y evolución - PrevIA</title>
+<style>
+  body {
+    font-family: "Segoe UI", sans-serif;
+    margin: 40px;
+    color: #222;
+  }
+  h1 {
+    text-align: center;
+    color: #0077cc;
+    margin-bottom: 40px;
+  }
+  .versiones {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .card {
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    width: 320px;
+    padding: 25px;
+    transition: transform 0.2s ease;
+  }
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  .card h2 {
+    margin-top: 0;
+    color: #fff;
+    font-size: 1.4em;
+    padding: 10px 15px;
+    border-radius: 8px;
+  }
+  .v01 h2 { background: #3eb489; }  /* Verde */
+  .v02 h2 { background: #e67e22; }  /* Naranja */
+  .v03 h2 { background: #0077cc; }  /* Azul */
+  ul {
+    padding-left: 20px;
+    margin: 0;
+  }
+  li {
+    margin-bottom: 8px;
+    line-height: 1.4em;
+  }
+</style>
+</head>
+<body>
+
+<h1>🧩 Alcance y evolución del proyecto PrevIA</h1>
+
+<div class="versiones">
+
+  <div class="card v01">
+    <h2>Versión 0.1</h2>
+    <ul>
+      <li>Procesamiento totalmente offline y local.</li>
+      <li>Detección automática de datos personales (PII).</li>
+      <li>Seudonimización, generalización y anonimización manual o automática.</li>
+      <li>Personalización de campos a analizar.</li>
+      <li>Exportación segura en formato <code>.txt</code> o copia estándar.</li>
+      <li>Guía de buenas prácticas y avisos éticos integrados.</li>
+    </ul>
+  </div>
+
+  <div class="card v02">
+    <h2>Versión 0.2</h2>
+    <ul>
+      <li>Soporte ampliado al idioma inglés.</li>
+      <li>Personalización avanzada del análisis (inclusión o exclusión de tipos de datos).</li>
+      <li>...</li>
+    </ul>
+  </div>
+
+  <div class="card v03">
+    <h2>Versión 0.3</h2>
+    <ul>
+      <li>Mejoras en precisión y rendimiento del análisis contextual.</li>
+      <li>Procesamiento de documentos básicos (TXT, DOCX, PDF).</li>
+      <li>...</li>
+    </ul>
+  </div>
+
+</div>
+
+</body>
+</html>

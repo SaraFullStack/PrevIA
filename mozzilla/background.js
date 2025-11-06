@@ -1,4 +1,4 @@
-chrome.action.onClicked.addListener(() => {
+chrome.browserAction.onClicked.addListener(() => {
   chrome.windows.create({
     url: "popup.html",
     type: "popup",
