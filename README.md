@@ -1,6 +1,6 @@
 # 🛡️ PrevIA – Protege tus textos
 
-**Versión:** v0.1.0  
+**Versión:** v0.1.1  
 **Autora:** Sara Cubero García-Conde  
 **Año:** 2025  
 
